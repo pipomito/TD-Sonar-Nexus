@@ -21,15 +21,16 @@ jobs:
       with:
         java-version: '17'
         distribution: temurin
+        cache: maven
 
 
     - name: Maven build
-      run: ./mvnw clean verify
+      run: mvn clean verify
 
 
     - name: SonarQube analysis
       run: |
-        ./mvnw sonar:sonar \
+        mvn sonar:sonar \
         -Dsonar.projectKey=TD-Sonar-Nexus \
         -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
         -Dsonar.token=${{ secrets.SONAR_TOKEN }}
